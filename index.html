@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev.System | Portfólio Tecnológico</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* --- PALETA DE CORES CYBERPUNK --- */
+            --bg-color: #050505;            
+            --card-bg: #0a0c0b;             
+            --primary-green: #00ff41;       
+            --dark-green-hover: #003b0f;    
+            --text-main: #e0e0e0;           
+            --text-muted: #8a998a;          
+            --border-color: #1f2e1f;
+            --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Fira Code', monospace; 
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Orbitron', sans-serif; 
+            color: var(--primary-green);
+            letter-spacing: 1px;
+        }
+
+        p, span, li, a, input, button {
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* --- Efeito de Grid no Fundo --- */
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-image: 
+                linear-gradient(rgba(0, 59, 15, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 59, 15, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- NAVEGAÇÃO --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(12px); 
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-muted);
+            transition: var(--transition);
+            font-size: 0.85rem;
+            position: relative;
+        }
+
+        .icon-container {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: transparent;
+        }
+
+        .nav-item:hover {
+            color: #fff;
+        }
+
+        .nav-item:hover .icon-container {
+            transform: translateY(-5px);
+            background: var(--dark-green-hover); 
+            color: var(--primary-green);
+            box-shadow: 0 0 15px var(--dark-green-hover);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center; /* Centraliza tudo horizontalmente */
+            text-align: center;  /* Centraliza o texto */
+            padding: 0 10%;
+        }
+
+        .hero h2 {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        /* Animação do Brilho (Pulse) */
+        @keyframes neonPulse {
+            0% {
+                filter: drop-shadow(0 0 2px rgba(0, 255, 65, 0.3));
+            }
+            50% {
+                filter: drop-shadow(0 0 15px rgba(0, 255, 65, 0.9));
+            }
+            100% {
+                filter: drop-shadow(0 0 2px rgba(0, 255, 65, 0.3));
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #fff, var(--primary-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            /* Aplicando a animação */
+            animation: neonPulse 3s infinite ease-in-out;
+        }
+
+        /* --- PROJETOS --- */
+        .section {
+            padding: 100px 10%;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section-title::before {
+            content: '//';
+            color: var(--primary-green);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            border-color: var(--primary-green);
+            transform: translateY(-5px);
+            background: linear-gradient(145deg, var(--card-bg), var(--dark-green-hover));
+        }
+
+        .project-icon-box {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 255, 65, 0.05);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-icon-box {
+            background: var(--dark-green-hover);
+            border-color: var(--primary-green);
+        }
+
+        .project-icon-box i {
+            font-size: 1.8rem;
+            color: var(--primary-green);
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-icon-box i {
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tech-tag {
+            font-size: 0.75rem;
+            padding: 6px 12px;
+            background: rgba(0, 255, 65, 0.05);
+            color: var(--primary-green);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        /* --- SKILLS --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            text-align: center;
+            transition: var(--transition);
+            cursor: default;
+        }
+
+        .skill-item:hover {
+            background: var(--dark-green-hover);
+            border-color: var(--primary-green);
+        }
+
+        .skill-item i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .skill-item:hover i {
+            color: var(--primary-green);
+            transform: scale(1.2);
+        }
+
+        /* --- BOTÃO WHATSAPP --- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            background: #25d366; 
+            border: 2px solid var(--primary-green);
+            border-radius: 50%;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            cursor: pointer;
+            z-index: 2000;
+            transition: var(--transition);
+            box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
+            text-decoration: none; 
+        }
+
+        .whatsapp-float:hover {
+            background: #128c7e;
+            box-shadow: 0 0 30px var(--primary-green);
+            transform: scale(1.1) rotate(10deg);
+            color: #fff;
+        }
+
+        footer {
+            padding: 50px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .social-icons a {
+            color: var(--text-muted);
+            margin: 0 15px;
+            font-size: 1.5rem;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-green);
+            transform: translateY(-3px);
+            text-shadow: 0 0 10px var(--dark-green-hover);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cyber-grid"></div>
+
+    <nav>
+        <div class="nav-links">
+            <a href="#home" class="nav-item">
+                <div class="icon-container"><i class="fas fa-terminal"></i></div>
+                <span>Início</span>
+            </a>
+            <a href="#projetos" class="nav-item">
+                <div class="icon-container"><i class="fas fa-code-branch"></i></div>
+                <span>Projetos</span>
+            </a>
+            <a href="#skills" class="nav-item">
+                <div class="icon-container"><i class="fas fa-layer-group"></i></div>
+                <span>Stack</span>
+            </a>
+            <a href="#contato" class="nav-item">
+                <div class="icon-container"><i class="fas fa-wifi"></i></div>
+                <span>Contato</span>
+            </a>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <h2 id="typewriter"></h2>
+        <h1>SYSTEMS <br> DEVELOPER</h1>
+        <p style="max-width: 600px; margin-bottom: 30px; color: var(--text-muted);">
+            Especialista em transformar ideias complexas em arquiteturas de software elegantes. 
+            Foco em performance, segurança e experiência do usuário.
+        </p>
+        </section>
+
+    <section id="projetos" class="section">
+        <h2 class="section-title">Projetos Recentes</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-icon-box">
+                    <i class="fas fa-server"></i>
+                </div>
+                <h3>Infraestrutura Cloud</h3>
+                <p style="color: #999; margin-bottom: 20px;">Orquestração de containers e servidores escaláveis para alta demanda de tráfego.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">Kubernetes</span>
+                    <span class="tech-tag">AWS</span>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-icon-box">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>App Financeiro</h3>
+                <p style="color: #999; margin-bottom: 20px;">Aplicação mobile com criptografia militar e design intuitivo para gestão de ativos.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">React Native</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">GraphQL</span>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-icon-box">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Dashboard IA</h3>
+                <p style="color: #999; margin-bottom: 20px;">Sistema web que prevê tendências de mercado utilizando Machine Learning em tempo real.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Vue.js</span>
+                    <span class="tech-tag">TensorFlow</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section">
+        <h2 class="section-title">Habilidades Técnicas</h2>
+        <div class="skills-grid">
+            <div class="skill-item">
+                <i class="fab fa-js"></i>
+                <h4>JavaScript</h4>
+            </div>
+            <div class="skill-item">
+                <i class="fab fa-react"></i>
+                <h4>React</h4>
+            </div>
+            <div class="skill-item">
+                <i class="fab fa-node"></i>
+                <h4>Node.js</h4>
+            </div>
+            <div class="skill-item">
+                <i class="fas fa-database"></i>
+                <h4>SQL</h4>
+            </div>
+            <div class="skill-item">
+                <i class="fab fa-python"></i>
+                <h4>Python</h4>
+            </div>
+            <div class="skill-item">
+                <i class="fab fa-git-alt"></i>
+                <h4>Git</h4>
+            </div>
+        </div>
+    </section>
+
+    <a href="https://wa.me/5551981757073" class="whatsapp-float" target="_blank" title="Fale comigo no WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <footer id="contato">
+        <div class="social-icons">
+            <a href="mailto:rodrigosystemsdeveloper@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+        <p style="margin-top: 20px; color: #666;">&copy; 2025 RODRIGO SYSTEM DEVELOPER. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        const text = "System: Online | Mode: Developer";
+        const typewriter = document.getElementById('typewriter');
+        let index = 0;
+
+        function type() {
+            if (index < text.length) {
+                typewriter.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(type, 100);
+            }
+        }
+        window.onload = type;
+    </script>
+</body>
+</html>
