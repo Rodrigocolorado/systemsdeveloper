@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Logo R">
+  <defs>
+    <radialGradient id="bg" cx="0.3" cy="0.2" r="1">
+      <stop offset="0" stop-color="#16382a"/>
+      <stop offset="0.55" stop-color="#0a1a12"/>
+      <stop offset="1" stop-color="#050d09"/>
+    </radialGradient>
+    <linearGradient id="face" x1="0.1" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#9dffc0"/>
+      <stop offset="0.4" stop-color="#2fe36f"/>
+      <stop offset="1" stop-color="#0a7f38"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.35"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="18" stdDeviation="16" flood-color="#000000" flood-opacity="0.6"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="22" flood-color="#2fe36f" flood-opacity="0.35"/>
+    </filter>
+    <clipPath id="rShape">
+      <path clip-rule="evenodd" d="M140 110H300C372 110 412 154 412 208C412 252 384 284 344 296L410 402H326L268 304H218V402H140Z M218 176V240H292C320 240 334 226 334 208C334 190 320 176 292 176Z"/>
+    </clipPath>
+  </defs>
+
+  <rect id="plate" width="512" height="512" rx="116" fill="url(#bg)"/>
+  <rect id="plate-edge" x="1.5" y="1.5" width="509" height="509" rx="114.5" fill="none" stroke="#2fe36f" stroke-opacity="0.22" stroke-width="3"/>
+
+  <g filter="url(#shadow)">
+    <path fill-rule="evenodd" fill="url(#face)" d="M140 110H300C372 110 412 154 412 208C412 252 384 284 344 296L410 402H326L268 304H218V402H140Z M218 176V240H292C320 240 334 226 334 208C334 190 320 176 292 176Z"/>
+  </g>
+
+  <g clip-path="url(#rShape)">
+    <path d="M344 296L410 402H326L268 304Z" fill="#04290f" opacity="0.38"/>
+    <path d="M140 110L318 110L140 288Z" fill="#ffffff" opacity="0.14"/>
+    <path d="M218 176V240H292C320 240 334 226 334 208C334 190 320 176 292 176Z" transform="translate(0 5)" fill="none" stroke="#04290f" stroke-opacity="0.55" stroke-width="12"/>
+    <rect x="130" y="110" width="290" height="5" fill="#ffffff" opacity="0.5"/>
+  </g>
+
+  <path fill-rule="evenodd" fill="none" stroke="url(#edge)" stroke-width="2.5" d="M140 110H300C372 110 412 154 412 208C412 252 384 284 344 296L410 402H326L268 304H218V402H140Z M218 176V240H292C320 240 334 226 334 208C334 190 320 176 292 176Z"/>
+</svg>
